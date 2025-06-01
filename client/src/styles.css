@@ -1,0 +1,727 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+/* DEFAULT SITE STYLING: WHITE BACKGROUND, BLACK TEXT FOR NON-HERO/HEADER SECTIONS */
+body, #root {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #ffffff; /* Default page background is white */
+  color: #000000; /* Default text color is black */
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+}
+
+/* Headings (h1-h6) will be BLACK by default for white sections. */
+/* Specific sections like Header/Hero/Latest/Work will set their headings to white if on dark background. */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  color: #000000; /* GLOBAL HEADINGS ARE BLACK */
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* HEADER STYLING */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 3rem 5rem; /* Large initial padding for space */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: padding 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  background-color: transparent; /* Initially transparent over video */
+}
+
+.header-scrolled {
+  padding: 1rem 5rem; /* Smaller padding when scrolled */
+  background-color: #000000; /* SOLID BLACK BACKGROUND WHEN SCROLLED */
+}
+
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  color: #ffffff; /* LOGO TEXT ALWAYS WHITE */
+  margin: 0;
+  cursor: pointer;
+  transition: font-size 0.3s ease-in-out; /* Smooth transition for font size */
+  line-height: 1;
+}
+
+/* Navigation Styling */
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 3rem;
+}
+
+.main-nav ul li a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  color: #ffffff; /* MENU TEXT ALWAYS WHITE */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.main-nav ul li a:hover {
+  color: #cccccc;
+}
+
+/* HOME SECTION STYLING (Hero) - Contains video and white text */
+.home-section {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  display: flex; /* Use flexbox to control content position */
+  justify-content: flex-start; /* Aligns content to the start (left) */
+  align-items: flex-end; /* Aligns content to the end (bottom) */
+  overflow: hidden; /* Hide video overflow */
+}
+
+.background-video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0; /* Changed to 0 so it's visible over the transparent body */
+}
+
+.background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the entire container */
+  filter: brightness(0.7); /* Slightly darken video initially for readability */
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 1; /* Above video, below content */
+  transition: background-color 0.1s ease-out;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 90%;
+  padding-left: 5rem; /* Pushes content from the left edge */
+  padding-bottom: 10rem; /* Pushes content from the bottom edge */
+  text-align: left;
+}
+
+.hero-text {
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 1.1em;
+  margin: 0;
+  color: #ffffff; /* HERO TEXT ALWAYS WHITE */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.scroll-indicator, .year-indicator {
+  position: absolute;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
+  color: #ffffff; /* INDICATOR TEXT ALWAYS WHITE */
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  z-index: 3;
+}
+
+.scroll-indicator {
+  left: 5rem;
+  bottom: 5rem;
+}
+
+.year-indicator {
+  right: 5rem;
+  bottom: 5rem;
+}
+
+/* SECTION SPECIFIC STYLES */
+
+/* Default Light Sections (White Background, Black Text) */
+#directors, #contact, #footer { /* REMOVED #blog, #culture from this list */
+  background-color: #ffffff;
+  color: #000000;
+  padding: 80px 5rem;
+  text-align: center;
+  min-height: 400px;
+  border-top: 1px solid #eee;
+}
+
+#directors h2, #contact h2, #footer h2 {
+  color: #000000;
+}
+
+#directors p, #contact p, #footer p {
+    color: #333333;
+}
+
+/* LATEST SECTION STYLING (Light Background, Black Text, Alternating Layout) */
+#latest {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 5rem 0 80px 0;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+
+.latest-section-title {
+  text-align: left;
+  font-size: 2.5rem;
+  margin: 0 0 40px 5rem;
+  color: #000000;
+}
+
+.latest-projects-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5rem;
+}
+
+.project-item {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  width: clamp(600px, 70vw, 900px);
+  margin-bottom: 0;
+}
+
+.project-item:nth-child(odd) {
+  align-self: flex-start;
+}
+
+.project-item:nth-child(even) {
+  align-self: flex-end;
+}
+
+.project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.project-video-wrapper {
+    width: 100%;
+    padding-top: 56.25%;
+    position: relative;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.project-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.project-info {
+  padding: 20px;
+  color: #000000;
+}
+
+.project-title {
+  font-size: 2.2rem;
+  margin: 0 0 5px 0;
+  color: #000000;
+}
+
+.project-category {
+  font-size: 1.4rem;
+  color: #666666;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* WORK SECTION STYLING (Black Background, White Text, Horizontal Hover Effect) */
+#work {
+  background-color: #000000; /* Black background as per requirement */
+  color: #ffffff; /* White text for this dark section */
+  padding: 5rem 0; /* Adjust padding for top/bottom */
+  min-height: 500px;
+  overflow: hidden; /* Hide overflow from expanding items */
+  border-top: 1px solid #333; /* Darker border for dark section */
+}
+
+.work-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* Align link to bottom of title */
+    margin: 0 5rem 40px 5rem; /* Margin for row, align with content */
+}
+
+.work-section-title {
+  text-align: left;
+  font-size: 8rem; /* Much larger font size for WORK */
+  margin: 0;
+  line-height: 1;
+  color: #ffffff; /* White title */
+  white-space: nowrap; /* Prevent wrapping if too wide */
+}
+
+.view-all-work-link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    color: #ffffff; /* White link */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease-in-out;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.view-all-work-link:hover {
+    color: #cccccc;
+}
+
+.work-projects-row {
+  display: flex; /* Use flexbox for horizontal layout */
+  align-items: stretch; /* Make items stretch to fill height */
+  height: 400px; /* Fixed height for the row of videos */
+  overflow: hidden; /* Hide anything outside this height */
+  margin: 0 5rem; /* Re-added margin for the row */
+  width: calc(100% - 10rem); /* Ensure container width accounts for margins */
+}
+
+.work-project-item {
+  flex: 1 1 0%; /* CRITICAL CHANGE: flex-grow:1, flex-shrink:1, flex-basis:0% */
+  height: 100%; /* Fill the height of the row */
+  overflow: hidden; /* Hide video overflow */
+  transition: flex 0.3s ease-in-out; /* Smooth transition for flex growth */
+  cursor: pointer;
+  position: relative; /* For absolute positioning of video */
+  box-sizing: border-box; /* Ensure padding/border included in width */
+  margin-right: 10px; /* ADDED GAP/PADDING HERE */
+}
+.work-project-item:last-child {
+    margin-right: 0;
+}
+
+.work-project-item:hover {
+  flex: 3; /* Hovered item takes 3 times more space */
+}
+
+/* Video wrapper and video inside work items */
+.work-video-wrapper {
+    width: 100%;
+    height: 100%; /* Fill the item height */
+    position: relative;
+    background-color: #000; /* Fallback */
+    overflow: hidden;
+}
+
+.work-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the entire container */
+    display: block;
+}
+
+/* DIRECTORS SECTION STYLING */
+.directors-section {
+  background-color: #ffffff; /* White background */
+  color: #000000; /* Black text */
+  padding: 80px 5rem; /* Standard section padding */
+  min-height: 700px; /* Ensure enough height for content */
+  display: flex; /* Use flexbox for filters, media, and list */
+  justify-content: space-between; /* Space out filters, media, list */
+  align-items: flex-start; /* Align items to the top */
+  gap: 5rem; /* Gap between columns */
+}
+
+.directors-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  min-width: 150px; /* Give some width to filters */
+  flex-shrink: 0; /* Prevent filters from shrinking too much */
+}
+
+.filter-item {
+  color: #bbbbbb; /* Greyed out by default */
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.filter-item:hover {
+  color: #000000; /* Black on hover */
+}
+
+.filter-item.active {
+  color: #000000; /* Black when active */
+  font-weight: 700;
+}
+
+.directors-media-display {
+  flex-grow: 1; /* Takes up available space */
+  max-width: 60%; /* Limit media width */
+  height: 450px; /* Fixed height for the media display */
+  background-color: #f0f0f0; /* Placeholder background */
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.director-media-video, .director-media-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.directors-list-container {
+  flex-grow: 1; /* Takes up remaining space */
+  max-width: 30%; /* Limit list width */
+  text-align: right; /* Align list to the right */
+}
+
+.active-director-name {
+  font-size: clamp(3rem, 4vw, 5rem); /* Responsive font size */
+  margin-bottom: 2rem;
+  color: #000000; /* Black text */
+  line-height: 1.1;
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+.directors-list {
+  list-style: none;
+  padding: 0;
+}
+
+.director-item {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem; /* Larger font size for names */
+  margin-bottom: 0.5rem;
+  color: #bbbbbb; /* Greyed out by default */
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+  line-height: 1.2;
+}
+
+.director-item:hover, .director-item.active {
+  color: #000000; /* Black on hover/active */
+}
+
+/* CONTACT SECTION STYLING */
+.contact-section {
+    /* Already styled as a default light section in the block above */
+    /* Just adding specific form styles now */
+}
+
+.contact-intro-text {
+    margin-bottom: 40px;
+    font-size: 1.8rem;
+    color: #333333;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #f8f8f8; /* Slightly off-white background for the form itself */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: left; /* Align form elements to the left */
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block; /* Make label appear on its own line */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    color: #333333;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    color: #333333;
+    background-color: #ffffff;
+    box-sizing: border-box; /* Include padding and border in element's total width */
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #000000; /* Black border on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); /* Subtle shadow on focus */
+}
+
+.form-group textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.submit-button {
+    display: block; /* Make button full width */
+    width: 100%;
+    padding: 15px 25px;
+    background-color: #000000; /* Black button background */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif; /* Use Oswald for button text */
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.submit-button:hover {
+    background-color: #333333; /* Slightly lighter black on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+
+/* FOOTER STYLING */
+.footer {
+  background-color: #ffffff; /* White background as per screenshot */
+  color: #000000; /* Black text for content */
+  padding: 5rem 0; /* Adjust padding as needed, similar to other sections */
+  font-family: 'Montserrat', sans-serif; /* Use your global font */
+  position: relative; /* For absolute positioning of chevron */
+  overflow: hidden; /* To contain the chevron if it goes outside */
+  border-top: 1px solid #eee; /* Matches the border from your styles.css for light sections */
+}
+
+.footer-content-wrapper {
+  display: flex;
+  justify-content: space-between; /* Distribute items horizontally */
+  align-items: flex-start; /* Align items to the top of the container */
+  max-width: 1400px; /* Use a max-width similar to your .latest-projects-grid */
+  margin: 0 auto; /* Center the content wrapper */
+  padding: 0 5rem; /* Matches your general section horizontal padding */
+  position: relative;
+  z-index: 1; /* Ensure content is above the chevron */
+}
+
+/* Black Chevron Styling */
+.footer-chevron {
+  position: absolute;
+  left: -70px; /* Adjusted to partially show, matching screenshot */
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg) skewX(20deg); /* Fine-tuned for the screenshot shape */
+  width: 150px; /* Size of the chevron */
+  height: 150px; /* Size of the chevron */
+  background-color: black;
+  z-index: 0; /* Behind the content */
+}
+
+
+.footer-nav ul,
+.footer-social ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-nav li,
+.footer-social li {
+  margin-bottom: 1rem; /* Spacing between list items, adjusted for 1.6rem base font */
+}
+
+.footer-nav a,
+.footer-social a {
+  text-decoration: none;
+  color: #000000; /* Black text */
+  font-weight: bold; /* Menu items appear bold in screenshot */
+  font-size: 1.6rem; /* Matches your p font size */
+  text-transform: uppercase; /* All caps */
+  letter-spacing: 0.05em; /* Slight letter spacing */
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-nav a:hover,
+.footer-social a:hover {
+  color: #cccccc; /* Lighter grey on hover, similar to your header nav */
+}
+
+/* Mailing List Section */
+.footer-mailing-list {
+  text-align: right; /* Align content to the right */
+  flex-shrink: 0; /* Prevent it from shrinking */
+  margin-left: auto; /* Push it to the right, creating space */
+}
+
+.footer-mailing-list h3 {
+  font-family: 'Oswald', sans-serif; /* Use Oswald for headings */
+  font-weight: 700; /* Bold as per your global h3 style */
+  font-size: 2.5rem; /* Larger font size for the heading */
+  margin-bottom: 1.5rem; /* Spacing below heading */
+  color: #000000; /* Black text */
+  text-transform: uppercase; /* All caps */
+}
+
+.mailing-list-form {
+  display: flex;
+  flex-direction: column; /* Stack input and button */
+  align-items: flex-end; /* Align to the right */
+}
+
+.mailing-list-form input {
+  padding: 1.2rem 1.5rem; /* Similar to your contact form inputs */
+  border: 1px solid #cccccc; /* Light grey border */
+  margin-bottom: 1.5rem; /* Space below input */
+  width: 300px; /* Adjust width as needed for screenshot resemblance */
+  background-color: #f8f8f8; /* Slightly off-white background for input */
+  color: #000000; /* Black text */
+  font-size: 1.6rem; /* Consistent font size */
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box; /* Include padding/border in width */
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.mailing-list-form input:focus {
+  border-color: #000000; /* Black border on focus */
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); /* Subtle shadow on focus */
+}
+
+.mailing-list-form button {
+  background-color: transparent; /* No background */
+  border: 1px solid #000000; /* Black border */
+  color: #000000; /* Black text */
+  padding: 1.2rem 2.5rem; /* Similar to your submit button padding */
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.6rem; /* Consistent font size */
+  font-family: 'Oswald', sans-serif; /* Use Oswald for button text */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.mailing-list-form button:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Bottom Section (Copyright and Credits) */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px; /* Match main content width */
+  margin: 5rem auto 0; /* Space above this section, centered */
+  padding: 2rem 5rem 0; /* Padding for the bottom section */
+  border-top: 1px solid #eee; /* Light line above copyright, matching your default light section border */
+  font-size: 1.4rem; /* Slightly smaller text for copyright */
+  color: #555555; /* Slightly muted color for copyright text */
+  font-family: 'Montserrat', sans-serif;
+}
+
+.footer-website-by {
+  font-weight: bold; /* "Website by Malvah" looks bold */
+}
+
+/* Optional: Responsive adjustments for smaller screens */
+@media (max-width: 992px) {
+  .footer-content-wrapper {
+    flex-direction: column; /* Stack content vertically */
+    align-items: center;
+    text-align: center;
+    gap: 3rem; /* Reduce gap when stacked */
+  }
+
+  .footer-nav,
+  .footer-social,
+  .footer-mailing-list {
+    margin-left: 0; /* Remove auto-margin when stacked */
+    align-items: center; /* Center items for stacked layout */
+  }
+
+  .footer-mailing-list {
+    text-align: center; /* Center mailing list elements */
+  }
+
+  .mailing-list-form {
+    align-items: center; /* Center input and button */
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-content-wrapper,
+  .footer-bottom {
+    padding: 0 2rem; /* Reduce horizontal padding */
+  }
+
+  .footer-chevron {
+    left: -100px; /* Push chevron further left on smaller screens if it's too dominant */
+  }
+}
